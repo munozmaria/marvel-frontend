@@ -1,0 +1,120 @@
+.container {
+  width: 1285px;
+  margin: 0 auto;
+  text-align: center;
+
+}
+
+h2{
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+
+/* ================================================================= HEADER =================================================================*/
+header {
+
+  padding: 2rem;
+  background-color: #202020;
+
+}
+
+header>div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header img {
+  object-fit: cover;
+  width: 100px;
+  cursor: pointer;
+}
+
+
+.navigation-links{
+  display: flex;
+  gap: 20px;
+
+}
+.navigation-links a{
+
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+
+/* =================================================================MAIN =================================================================  */
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px auto auto;
+  gap: 20px;
+  list-style: none;
+
+
+}
+
+
+
+
+main article {
+  cursor: pointer;
+  padding: 10px ;
+  width: 235px;
+  height: 500px;
+ 
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap:20px;
+
+}
+
+
+main article h2{
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+main article p{
+  font-size: 15px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+
+
+main article img{
+  width: 100%;
+  height: auto;
+  float: left;
+}
+
+
+/*========================================COMICS================================*/
+
+.comic-selected{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px auto;
+  width: 500px;
+  gap:20px;
+}
+
+.comic-selected img{
+  height: 400px;
+}
+
+.comic-selected-details{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  
+}
