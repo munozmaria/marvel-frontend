@@ -27,12 +27,12 @@ const Characters = () => {
     <>
       <main className="container">
         {data.results.map((character) => {
-          console.log(character);
+          //console.log(character);
           const url =
             character.thumbnail.path + "." + character.thumbnail.extension;
           return (
             <div key={character._id}>
-              <Link to={`/character/${character._id}`}>
+              <Link to={`/character/${character._id}`} >
                 <article>
                   <div className="container-img">
                     <img src={url} alt="" />

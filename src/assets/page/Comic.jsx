@@ -14,7 +14,7 @@ const Comic = () => {
         const response = await axios.get(
           `https://site--marvel-backend--yxbrqvg2lzlq.code.run/comic/${comicId}`
         );
-        console.log(response.data);
+        //console.log(response.data);
         const url =
           response.data.thumbnail.path +
           "." +

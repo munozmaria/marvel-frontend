@@ -10,8 +10,8 @@ const Header = () => {
         </Link>
 
         <div className="navigation-links">
-          <Link to="/characters">Personages</Link>
-          <Link to="/">Comics</Link>
+          <Link to="/">Personages</Link>
+          <Link to="/comics">Comics</Link>
           <Link>Favoris</Link>
         </div>
       </div>
