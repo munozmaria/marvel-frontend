@@ -9,15 +9,20 @@ import Comics from "./assets/page/Comics";
 import Comic from "./assets/page/Comic";
 import Characters from "./assets/page/Characters";
 import Character from "./assets/page/Character";
+import { useState } from "react";
 
 const App = () => {
+
+
+  const [search, setSearch] = useState("")
+
   return (
     <Router>
-      <Header />
+      <Header setSearch={setSearch} search={search} />
       <Routes>
-        <Route path="/comics" element={<Comics />} />
+        <Route path="/" element={<Characters search={search} />} />
+        <Route path="/comics" element={<Comics search={search} />} />
         <Route path="/comic/:comicId" element={<Comic />} />
-        <Route path="/" element={<Characters />} />
         <Route path="/character/:characterId" element={<Character />} />
       </Routes>
     </Router>

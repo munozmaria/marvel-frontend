@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Characters = () => {
+const Characters = ({search}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
 
@@ -10,7 +10,7 @@ const Characters = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://site--marvel-backend--yxbrqvg2lzlq.code.run/characters"
+          `https://site--marvel-backend--yxbrqvg2lzlq.code.run/characters?name=${search}`
         );
         //console.log(response.data)
         setIsLoading(false);
@@ -20,7 +20,7 @@ const Characters = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [search]);
   return isLoading ? (
     <p>Loading....</p>
   ) : (

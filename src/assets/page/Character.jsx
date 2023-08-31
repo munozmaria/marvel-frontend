@@ -36,7 +36,7 @@ const Character = () => {
         {dataComics.comics.map((comic) => {
           //console.log(comic);
           return (
-            <Link to={`/comic/${comic._id}`}>
+            <Link key={comic._id} to={`/comic/${comic._id}`}>
             <div className="comic-selected">
               {" "}
               <article>

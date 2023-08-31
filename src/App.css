@@ -1,5 +1,5 @@
 .container {
-  width: 1285px;
+  
   margin: 0 auto;
   text-align: center;
 
@@ -43,6 +43,50 @@ header img {
   background-color: white;
   padding: 10px;
   border-radius: 5px;
+}
+
+.search{
+  display: inline-flex;
+  align-items: center;
+
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #fff;
+}
+
+.search :is(input, button){
+  background: transparent;
+  color:inherit;
+  border: none;
+  outline: none;
+}
+
+.searchInput{
+  width:0;
+  transition: width 0.5s;
+}
+
+.searchButton{
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  transition: color 0.25s;
+}
+
+.searchButton:hover{
+  color: #e3e3e3;
+}
+
+.search:focus-within input{
+  width: 200px;
+}
+
+::placeholder{
+  font: inherit;
+  color:#e3e3e3;
 }
 
 

@@ -3,23 +3,26 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const Comics = () => {
+const Comics = ({ search }) => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
-      const response = await axios.get(
-        `https://site--marvel-backend--yxbrqvg2lzlq.code.run/comics`
-      );
-      //console.log(response.data);
-      setData(response.data);
-      setIsLoading(false);
+      try {
+        const response = await axios.get(
+          `https://site--marvel-backend--yxbrqvg2lzlq.code.run/comics?title=${search}`
+        );
+        //console.log(response.data);
+        setIsLoading(false);
+        setData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     fetchData();
-  }, []);
+  }, [search]);
 
   return isLoading ? (
     <span>Loading... </span>
