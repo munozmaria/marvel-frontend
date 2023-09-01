@@ -1,16 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Characters = ({search}) => {
+const Characters = ({search, setSkip, skip}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://site--marvel-backend--yxbrqvg2lzlq.code.run/characters?name=${search}`
+          `https://site--marvel-backend--yxbrqvg2lzlq.code.run/characters?name=${search}&skip=${skip}`
         );
         //console.log(response.data)
         setIsLoading(false);
@@ -20,12 +21,20 @@ const Characters = ({search}) => {
       }
     };
     fetchData();
-  }, [search]);
+  }, [search, skip]);
   return isLoading ? (
     <p>Loading....</p>
   ) : (
     <>
-      <main className="container">
+    <button onClick={()=>{
+      setSkip(skip - 100)
+      navigate("/")
+    }}>PREVIOUS PAGE</button>
+    <button onClick={()=>{
+      setSkip(skip + 100)
+      navigate("/")
+    }}>NEXT PAGE</button>
+      <main>
         {data.results.map((character) => {
           //console.log(character);
           const url =
@@ -35,7 +44,7 @@ const Characters = ({search}) => {
               <Link to={`/character/${character._id}`} >
                 <article>
                   <div className="container-img">
-                    <img src={url} alt="" />
+                    <img className="characters-img" src={url} alt="" />
                   </div>
 
                   <h2>{character.name}</h2>
@@ -51,3 +60,7 @@ const Characters = ({search}) => {
 };
 
 export default Characters;
+
+
+
+

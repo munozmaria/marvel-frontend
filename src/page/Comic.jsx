@@ -29,18 +29,17 @@ const Comic = () => {
   }, [comicId]);
 
   return (
-    <>
-      <div className="comic-selected">
-      <img src={img} alt="" />
-        <div className="comic-selected-details">
-          <h2>{data.title}</h2>
-          <p>{data.description}</p>
+    <main>
+      <div className="id-comic">
+        <div className="container-img">
+          <img className="characters-img" src={img} alt="" />
         </div>
+
+        <h2>{data.title}</h2>
+        <p>{data.description}</p>
       </div>
-    </>
+    </main>
   );
 };
 
 export default Comic;
-
-

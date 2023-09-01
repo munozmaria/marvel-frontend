@@ -30,9 +30,10 @@ const Character = () => {
     <span>Loading...</span>
   ) : (
     <>
-      <div>
-       <h2>Voici tous les Comics de:</h2> 
+      <div className="selected-character">
+      
         <h2>{dataComics.name}</h2>
+        <main>
         {dataComics.comics.map((comic) => {
           //console.log(comic);
           return (
@@ -40,18 +41,19 @@ const Character = () => {
             <div className="comic-selected">
               {" "}
               <article>
-                <h2> {comic.description}</h2>
-                <div className="comic-selected-details">
+                <div className="container-img">
                   <img
                     src={comic.thumbnail.path + "." + comic.thumbnail.extension}
                     alt=""
-                  />
+                    />
                 </div>
+                    <h2> {comic.description}</h2>
               </article>{" "}
             </div>
             </Link>
           );
         })}
+        </main>
       </div>
     </>
   );

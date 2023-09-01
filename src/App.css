@@ -1,3 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Marvel:wght@400;700&display=swap');
+
+*{
+  box-sizing: border-box;
+}
+
+
+body, button, input, select, textarea, ::placeholder{
+  font-family: "Marvel", sans-serif;
+}
+
+body{
+  background: rgb(0,0,0);
+background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(92,89,81,1) 35%, rgba(66,24,17,1) 100%);
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+}
+
+input {
+  outline: none;
+}
+
 .container {
   
   margin: 0 auto;
@@ -15,8 +40,10 @@ h2{
 /* ================================================================= HEADER =================================================================*/
 header {
 
-  padding: 2rem;
-  background-color: #202020;
+  padding: 1rem 3em 1em 2em;
+  background: transparent;
+  position: relative;
+  z-index: 2;
 
 }
 
@@ -28,19 +55,23 @@ header>div {
 
 header img {
   object-fit: cover;
-  width: 100px;
+  width: 140px;
   cursor: pointer;
+  margin-right: 44px;
 }
 
 
-.navigation-links{
+.navigation-links {
   display: flex;
   gap: 20px;
-
+  align-items: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 20px;
 }
 .navigation-links a{
 
-  background-color: white;
+ color: white;
   padding: 10px;
   border-radius: 5px;
 }
@@ -52,7 +83,7 @@ header img {
   color: #fff;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #fff;
+  border: 1px solid white;
 }
 
 .search :is(input, button){
@@ -70,10 +101,13 @@ header img {
 .searchButton{
   display: grid;
   place-items: center;
-  width: 25px;
-  height: 25px;
+ 
   cursor: pointer;
   transition: color 0.25s;
+}
+
+.fa-magnifying-glass{
+  font-size: 20px;
 }
 
 .searchButton:hover{
@@ -82,6 +116,7 @@ header img {
 
 .search:focus-within input{
   width: 200px;
+
 }
 
 ::placeholder{
@@ -90,13 +125,95 @@ header img {
 }
 
 
+.container-home{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient( to bottom, rgb(2 2 8 / 50%), rgb(17 17 19 / 50%) ), url("./assets/img/iron.jpg");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+  filter: blur(0.5px);
+ 
+
+}
+
+
+.img2{
+  position: absolute;
+  width: 200px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transform: translateY(25%);
+  transition: all .3s ease;
+  opacity: 0;
+
+}
+
+.container-home:hover{
+  transform: perspective(250px) rotateX(10deg) translateY(-5%) translateZ(0)
+   ;
+}
+
+.container-home::before{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(to bottom, transparent 10%, rgba(0 ,0, 0, 0.5)50%, rgba(0,0,0)95%);
+opacity: 0;
+transition: all .3s ease;
+}
+
+
+.container-home :hover .img2{
+  opacity: 1;
+  transform: translateY(10%);
+
+}
+/* .div1 {
+    background: linear-gradient( to bottom, rgb(0 0 0 / 96%), rgb(7 7 19 / 89%));
+    width: 803px;
+    transform: scale(1.1); 
+ 
+
+}
+
+.div2{
+  background-image: linear-gradient( to bottom, rgb(2 2 8 / 50%), rgb(17 17 19 / 50%) ), url("./assets//img/marvel.jpg");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+  filter: blur(0.5px);
+  transform: scale(1.1); 
+  flex:1;
+ 
+
+}
+ */
+
+
+
+
+
+
+
 /* =================================================================MAIN =================================================================  */
+
 
 main {
   display: flex;
   flex-wrap: wrap;
-  margin: 30px auto auto;
-  gap: 20px;
+  justify-content: center;
+  margin: 30px auto;
+  gap: 23px;
   list-style: none;
 
 
@@ -107,17 +224,21 @@ main {
 
 main article {
   cursor: pointer;
-  padding: 10px ;
-  width: 235px;
+  padding: 10px;
+  width: 231px;
+  color: white;
   height: 500px;
- 
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
-  gap:20px;
-
+  gap: 20px;
+  /* background: white; */
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.16), 0 4px 6px #ff253a;
 }
+
+
 
 
 main article h2{
@@ -138,27 +259,42 @@ main article img{
   width: 100%;
   height: auto;
   float: left;
+  border-radius: 5px;
 }
 
-
+.characters-img{
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  float: left;
+  border-radius: 5px;
+}
 /*========================================COMICS================================*/
 
-.comic-selected{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 50px auto;
+.selected-character h2{
+  text-align: center;
+  color: white;
+}
+
+.selected-character article h2{
+  color: black;
+}
+
+.id-comic{
+  background-color: transparent;
+  padding: 60px;
+  border-radius: 5px;
+  border: 1px solid white;
   width: 500px;
-  gap:20px;
 }
 
-.comic-selected img{
-  height: 400px;
+.id-comic h2, .id-comic p{
+  color: white
 }
 
-.comic-selected-details{
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  
+.id-comic img{
+  margin-bottom: 20px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.16), 0 4px 6px rgba(0,0,0,0.45);
 }
