@@ -60,6 +60,13 @@ header img {
   margin-right: 44px;
 }
 
+.div-buttons-connection a{
+  color: rgb(239, 17, 17);
+ background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
 
 .navigation-links {
   display: flex;
@@ -297,4 +304,112 @@ main article img{
   border-radius: 12px;
   object-fit: cover;
   box-shadow: inset 0 3px 6px rgba(0,0,0,0.16), 0 4px 6px rgba(0,0,0,0.45);
+}
+
+
+/*========================================= FORMULAIRE================*/
+.formulaire{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  top: 0;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.7);
+  align-items: center;
+  z-index: 999;    
+  justify-content: center;
+}
+
+
+.closeModal{
+  position: absolute;
+  top: 4%;
+  right: 7%;
+  cursor: pointer;
+  transition: transform .2s;
+  color:rgb(253, 247, 247);
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.closeModal:hover{
+  transform: scale(1.5)
+}
+
+.formContainer {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  background-color: white;
+  padding: 48px 70px;
+  border-radius: 5px;
+
+
+}
+
+
+
+.formulaire form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 320px;
+
+}
+
+.formulaire form input {
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: rgb(164, 164, 181)
+}
+
+
+.formulaire form input:focus {
+  border: 2px solid rgb(150, 255, 171);
+  outline: none;
+}
+
+
+.formulaire form .buttonFormulaire {
+  margin-top: 25px;
+  background-color: rgb(235, 111, 111);
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+  border: 1px solid black;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+
+}
+
+.formulaire form h1 {
+  text-align: center;
+  font-size: 25px;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+
+.wrong {
+  border: 1px solid rgb(244, 24, 24);
+}
+
+.passwordInput {
+  position: relative;
+
+}
+
+
+.eyeIcon {
+  position: absolute;
+  top: 30%;
+  font-size: 20px;
+  right: 10px;
+  cursor: pointer;
 }

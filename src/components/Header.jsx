@@ -6,8 +6,9 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 library.add(faMagnifyingGlass);
 
-const Header = ({setSearch, search}) => {
- 
+const Header = ({setSearch, search, handleSingupButton, token, handleToken, handleLoginButton}) => {
+
+
 
   return (
     <header>
@@ -19,13 +20,34 @@ const Header = ({setSearch, search}) => {
         </Link>
           <Link to="/">Characters</Link>
           <Link to="/comics">Comics</Link>
-          <Link>Favoris</Link>
+          <Link to="/favourites">Favourites</Link>
         </div>
 
-      <div>
-        <button>Signup</button>
-        <button>Login</button>
-      </div>
+        {!token ? (
+          <div className="div-buttons-connection">
+            {" "}
+            <button onClick={handleSingupButton} className="button-signup">
+              {" "}
+              S'inscrire
+            </button>
+            <button onClick={handleLoginButton} className="button-login">
+              Se connecter
+            </button>
+          </div>
+        ) : (
+          <div>
+            <Link to="/">
+              <button
+                className="button-logout"
+                onClick={() => {
+                  handleToken(null);
+                }}>
+                Se déconnecter
+              </button>
+            </Link>
+          </div>
+        )}
+
 
         <div className="search" >
           <input type="text" placeholder="Recherche" value={search} className="searchInput" onChange={(event)=>{
