@@ -7,6 +7,8 @@ const Favourite = () => {
   let token = Cookies.get("token", null);
   const [like, setLike] = useState([]);
   const [data, setData] = useState([]);
+  const [dataComics, setDataComics] = useState([]);
+  const [likeComic, setLikeComic] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -25,21 +27,48 @@ const Favourite = () => {
     }
   };
 
+  const fetchDataComics = async () => {
+    try {
+      const allComicsWithCookies = likeComic.map((cookie) => {
+       // console.log(cookie)
+        return axios.get(
+          `https://site--marvel-backend--yxbrqvg2lzlq.code.run/comic/${cookie}`
+        );
+      });
+      axios.all(allComicsWithCookies).then((favorites) => {
+        //console.log(favorites)
+        setDataComics(favorites);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
+
   useEffect(() => {
     const fetchData = async (event) => {
       const response = await axios.get(
         `https://site--marvel-backend--yxbrqvg2lzlq.code.run/likesUsers/${token}`
       );
-      //console.log(response)
-      setLike(response.data.likesCharacters);
+      console.log(response)
+      setLike([...response.data.likesCharacters]);
+      setLikeComic([...response.data.likesComics]);
+      
     };
     fetchData();
   }, [token]);
 
 
   useEffect(() => {
-    fetchData();
-  }, [like]);
+    fetchData()
+  },[like])
+
+useEffect(() => {
+  fetchDataComics()
+},[likeComic])
+
 
   return (
     <div>
@@ -64,6 +93,31 @@ const Favourite = () => {
 
                   <h2>{character.data.name}</h2>
                   <p>{character.data.description}</p>
+                </article>
+              </Link>
+            </div>
+          );
+        })}
+            {dataComics.map((comic) => {
+          //console.log(comic)
+          return (
+            <div key={comic.data._id}>
+              <Link to={`/comic/${comic._id}`}>
+                <article>
+                  <div className="container-img">
+                    <img
+                      className="comics-img"
+                      src={
+                        comic.data.thumbnail.path +
+                        "." +
+                        comic.data.thumbnail.extension
+                      }
+                      alt=""
+                    />
+                  </div>
+
+                  <h2>{comic.data.name}</h2>
+                  <p>{comic.data.description}</p>
                 </article>
               </Link>
             </div>
