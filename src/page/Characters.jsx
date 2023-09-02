@@ -64,20 +64,30 @@ const Characters = ({ search, setSkip, skip, token }) => {
     <p>Loading....</p>
   ) : (
     <>
-      <button
-        onClick={() => {
-          setSkip(skip - 100);
-          navigate("/");
-        }}>
-        PREVIOUS PAGE
-      </button>
-      <button
-        onClick={() => {
-          setSkip(skip + 100);
-          navigate("/");
-        }}>
-        NEXT PAGE
-      </button>
+      {skip > 0 && (
+                <div>
+                  <button
+                    onClick={() => {
+                      setSkip(skip - data.limit);
+                      navigate("/");
+                    }}
+                  >
+                    Previous Page
+                  </button>
+                </div>
+              )}
+      {skip < data.count - data.limit && (
+                <div>
+                  <button
+                    onClick={() => {
+                      setSkip(skip + data.limit);
+                      navigate("/");
+                    }}
+                  >
+                   Next Page
+                  </button>
+                </div>
+              )}
       <main>
         {data.results.map((character) => {
           //console.log(character);

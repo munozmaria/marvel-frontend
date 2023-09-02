@@ -66,26 +66,34 @@ const Comics = ({ search, skip, setSkip, token }) => {
 
 
 
-
-
-
-
-
-
-
-
   return isLoading ? (
     <span>Loading... </span>
   ) : (
     <>
-    <button onClick={()=>{
-      setSkip(skip - 100)
-      navigate("/")
-    }}>PREVIOUS PAGE</button>
-    <button onClick={()=>{
-      setSkip(skip + 100)
-      navigate("/")
-    }}>NEXT PAGE</button>
+   {skip > 0 && (
+                <div>
+                  <button
+                    onClick={() => {
+                      setSkip(skip - data.limit);
+                      navigate("/comics");
+                    }}
+                  >
+                    Previous Page
+                  </button>
+                </div>
+              )}
+      {skip < data.count - data.limit && (
+                <div>
+                  <button
+                    onClick={() => {
+                      setSkip(skip + data.limit);
+                      navigate("/comics");
+                    }}
+                  >
+                   Next Page
+                  </button>
+                </div>
+              )}
       <main >
         {data.results.map((comics) => {
           const url = comics.thumbnail.path + "." + comics.thumbnail.extension;

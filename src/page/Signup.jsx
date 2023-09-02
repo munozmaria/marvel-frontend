@@ -14,7 +14,7 @@ const Signup = ({ handleCloseModals, handleToken, notify }) => {
   const [hashPassword, setHashPassword] = useState(true);
   const [confirmHashPassword, setConfirmHashPassword] = useState(true);
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [identiques, setIdentiques] = useState(false);
+  const [identiques, setIdentiques] = useState(true);
    const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
