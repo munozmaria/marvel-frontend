@@ -10,6 +10,9 @@ const Favourite = () => {
   const [dataComics, setDataComics] = useState([]);
   const [likeComic, setLikeComic] = useState([]);
 
+
+  
+
   const fetchData = async () => {
     try {
       const allCharactersWithCookies = like.map((cookie) => {

@@ -8,7 +8,7 @@ import { faHeart as farfaHeart } from "@fortawesome/free-regular-svg-icons";
 
 library.add(faHeart, farfaHeart);
 
-const Characters = ({ search, setSkip, skip, token }) => {
+const Characters = ({ search, setSkip, skip, token, setLoginModal }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
   const [likesCharacters, setLikesCharacters] = useState([]);
@@ -16,6 +16,7 @@ const Characters = ({ search, setSkip, skip, token }) => {
   const navigate = useNavigate();
 
   //console.log(likesCharacters)
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,17 +47,17 @@ const Characters = ({ search, setSkip, skip, token }) => {
 
   const handleLike = async (event, characterId) => {
     event.preventDefault();
- 
-    
-      const response = await axios.post(
-        `https://site--marvel-backend--yxbrqvg2lzlq.code.run/favorites/${likesCharacters.includes(characterId) ? "un" : ""}like`,
-        {
-          token,
-          likesCharacters: characterId,
-        }
-      );
 
-    
+    const response = await axios.post(
+      `https://site--marvel-backend--yxbrqvg2lzlq.code.run/favorites/${
+        likesCharacters.includes(characterId) ? "un" : ""
+      }like`,
+      {
+        token,
+        likesCharacters: characterId,
+      }
+    );
+
     setLikesCharacters(response.data.user.likesCharacters);
   };
 
@@ -64,32 +65,30 @@ const Characters = ({ search, setSkip, skip, token }) => {
     <p>Loading....</p>
   ) : (
     <>
-    <div className="container-buttons-pagination">
-      {skip > 0 && (
-                <div>
-                  <button
-                    onClick={() => {
-                      setSkip(skip - data.limit);
-                      navigate("/");
-                    }}
-                  >
-                    Previous Page
-                  </button>
-                </div>
-              )}
-      {skip < data.count - data.limit && (
-                <div>
-                  <button
-                    onClick={() => {
-                      setSkip(skip + data.limit);
-                      navigate("/");
-                    }}
-                  >
-                   Next Page
-                  </button>
-                </div>
-              )}
-              </div>
+      <div className="container-buttons-pagination">
+        {skip > 0 && (
+          <div>
+            <button
+              onClick={() => {
+                setSkip(skip - data.limit);
+                navigate("/");
+              }}>
+              Previous Page
+            </button>
+          </div>
+        )}
+        {skip < data.count - data.limit && (
+          <div>
+            <button
+              onClick={() => {
+                setSkip(skip + data.limit);
+                navigate("/");
+              }}>
+              Next Page
+            </button>
+          </div>
+        )}
+      </div>
       <main>
         {data.results.map((character) => {
           //console.log(character);
@@ -100,7 +99,7 @@ const Characters = ({ search, setSkip, skip, token }) => {
               <Link to={`/character/${character._id}`}>
                 <article>
                   <div
-                  className="container-likes"
+                    className="container-likes"
                     onClick={(event) => {
                       handleLike(event, character._id);
                     }}>
@@ -108,15 +107,15 @@ const Characters = ({ search, setSkip, skip, token }) => {
                     {[...likesCharacters].includes(character._id) ? (
                       <FontAwesomeIcon icon={faHeart} />
                     ) : (
-                      <FontAwesomeIcon  className="fa-beat"  icon={farfaHeart} />
+                      <FontAwesomeIcon className="fa-beat" icon={farfaHeart} />
                     )}
                   </div>
                   <div className="container-img">
                     <img className="characters-img" src={url} alt="" />
                   </div>
-                      <div className="content-text">
-                  <h2>{character.name}</h2>
-                  <p>{character.description}</p>
+                  <div className="content-text">
+                    <h2>{character.name}</h2>
+                    <p>{character.description}</p>
                   </div>
                 </article>
               </Link>

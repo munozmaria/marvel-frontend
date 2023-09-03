@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
 import Header from "./components/Header";
 import Home from "./page/Home";
@@ -24,6 +24,8 @@ const App = () => {
   const [signupModal, setSignupModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const [likesCharacters, setLikesCharacters] = useState([]);
+
+
 
   const handleSingupButton = () => {
     if (!token) {
@@ -58,6 +60,8 @@ const App = () => {
       setToken(null);
     }
   };
+
+
 
   const notify = (message) => toast.error(message);
 
@@ -95,6 +99,7 @@ const App = () => {
         search={search}
         handleSingupButton={handleSingupButton}
         handleLoginButton={handleLoginButton}
+        setLoginModal={setLoginModal}
       />
       <Routes>
         <Route
@@ -107,6 +112,7 @@ const App = () => {
               token={token}
               likesCharacters={likesCharacters}
               setLikesCharacters={setLikesCharacters}
+              setLoginModal={setLoginModal}
             />
           }
         />
@@ -117,7 +123,7 @@ const App = () => {
         />
         <Route path="/comic/:comicId" element={<Comic />} />
         <Route path="/character/:characterId" element={<Character />} />
-        <Route path="/favourites" element={<Favourites />} token={token} />
+        <Route path="/favourites" element={<Favourites />} token={token} setLoginModal={setLoginModal} />
       </Routes>
     </Router>
   );

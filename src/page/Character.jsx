@@ -35,19 +35,25 @@ const Character = () => {
         <h2>{dataComics.name}</h2>
         <main>
         {dataComics.comics.map((comic) => {
-          //console.log(comic);
+          console.log(comic);
           return (
             <Link key={comic._id} to={`/comic/${comic._id}`}>
             <div className="comic-selected">
               {" "}
-              <article>
-                <div className="container-img">
+              <article  className="comics-article">
+                <div  className={!comic.thumbnail.path.endsWith('image_not_available') ? "container-img not-available" : "container-img"} >
                   <img
                     src={comic.thumbnail.path + "." + comic.thumbnail.extension}
                     alt=""
                     />
-                </div>
-                    <h2> {comic.description}</h2>
+                </div> 
+                
+                {comic.title ? <div className="content-text">
+                <h2>{comic.title}</h2>
+                   <p>{comic.description}</p>
+
+                </div> : "" }
+                
               </article>{" "}
             </div>
             </Link>

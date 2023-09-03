@@ -1,26 +1,72 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logo from "../assets/img/marvel.png";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-library.add(faMagnifyingGlass);
+import {
+  faMagnifyingGlass,
+  faBars,
+  faX,
+} from "@fortawesome/free-solid-svg-icons";
+library.add(faMagnifyingGlass, faBars, faX);
 
-const Header = ({setSearch, search, handleSingupButton, token, handleToken, handleLoginButton}) => {
+const Header = ({
+  setSearch,
+  search,
+  handleSingupButton,
+  token,
+  handleToken,
+  handleLoginButton,
+  setLoginModal,
+}) => {
 
+  const [click, setClick] = useState(false);
+  const handleClick = () => {
+    setClick(!click);
+    document.body.style.overflow = "hidden";
+  };
 
+  const handleClickClosed = () => {
+    setClick(false);
+    document.body.style.overflow = "auto";
+  };
+
+  let menuRef = useRef();
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (!menuRef.current.contains(e.target)) {
+        setClick(false);
+        //console.log(menuRef.current)
+      }
+    };
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+  const handleClickFavorites = () => {
+    if (!token) {
+      setLoginModal(true);
+    } else{
+      setClick(false);
+    }
+  };
 
   return (
-    <header>
-      <div className="container">
-
+    <header ref={menuRef} className={click ? "main-container" : ""}>
+      <Link to="/home">
+        <img src={logo} alt="" />
+      </Link>
+      <div className={click ? "container-nav active" : "container-nav"}>
         <div className="navigation-links">
-        <Link to="/home">
-          <img src={logo} alt="" />
-        </Link>
-          <Link to="/">Characters</Link>
-          <Link to="/comics">Comics</Link>
-          <Link to="/favourites">Favourites</Link>
+          <Link to="/" onClick={click ? handleClick : false}>Characters</Link>
+          <Link to="/comics"  onClick={click ? handleClick : false}>Comics</Link>
+          <Link to={token ? "/favourites" : "/"} onClick={handleClickFavorites}>
+            Favourites
+          </Link>
         </div>
 
         {!token ? (
@@ -37,27 +83,41 @@ const Header = ({setSearch, search, handleSingupButton, token, handleToken, hand
         ) : (
           <div>
             <Link to="/">
-              <button
-                className="button-logout"
-                onClick={() => {
-                  handleToken(null);
-                }}>
-                Se déconnecter
-              </button>
+              <div className="div-buttons-connection">
+                <button
+                  className="button-logout"
+                  onClick={() => {
+                    handleToken(null);
+                  }}>
+                  Se déconnecter
+                </button>
+              </div>
             </Link>
           </div>
         )}
 
-
-        <div className="search" >
-          <input type="text" placeholder="Recherche" value={search} className="searchInput" onChange={(event)=>{
-            //console.log(event.target.value)
+        <div className="search">
+          <input
+            type="text"
+            placeholder="Recherche"
+            value={search}
+            className="searchInput"
+            onChange={(event) => {
+              //console.log(event.target.value)
               setSearch(event.target.value);
-          }} />
+            }}
+          />
           <button className="searchButton">
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </button>
         </div>
+      </div>
+      <div className="nav-icon">
+        {click === true ? (
+          <FontAwesomeIcon icon={faX} onClick={handleClickClosed} />
+        ) : (
+          <FontAwesomeIcon icon={faBars} onClick={handleClick} />
+        )}
       </div>
     </header>
   );
