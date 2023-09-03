@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Comic = () => {
   const { comicId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
   const [img, setImage] = useState("");
+  let navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,21 +32,28 @@ const Comic = () => {
 
   return isLoading ? (
     <div className="container-loading ">
-    <div className="loading"></div>
-  </div>
+      <div className="loading"></div>
+    </div>
   ) : (
-    <main>
-       <div className="container-cards">
-      <div className="id-comic">
-        <div className="container-img">
-          <img className="characters-img" src={img} alt="" />
+    <>
+      <div className="container-buttons-pagination">
+        <div>
+          <button onClick={() => navigate(-1)}> Previous Page</button>
         </div>
+      </div>
+      <main>
+        <div className="container-cards">
+          <div className="id-comic">
+            <div className="container-img">
+              <img className="characters-img" src={img} alt="" />
+            </div>
 
-        <h2>{data.title}</h2>
-        <p>{data.description}</p>
-      </div>
-      </div>
-    </main>
+            <h2>{data.title}</h2>
+            <p>{data.description}</p>
+          </div>
+        </div>
+      </main>
+    </>
   );
 };
 

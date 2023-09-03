@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Character = () => {
   const { characterId } = useParams();
@@ -8,6 +9,7 @@ const Character = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [dataComics, setDataComics] = useState({});
+  let navigate = useNavigate();
 
   useEffect(() => {
     const fetchDataComics = async () => {
@@ -32,40 +34,60 @@ const Character = () => {
     </div>
   ) : (
     <>
+      <div className="container-buttons-pagination">
+        <div>
+          <button onClick={() => navigate(-1)}> Previous Page</button>
+        </div>
+      </div>
       <div className="selected-character">
-      
-      <div>
-        <h2>{dataComics.name}</h2>
-        <img src={dataComics.thumbnail.path + "." + dataComics.thumbnail.extension} alt="" />
+        <div>
+          <h2>{dataComics.name}</h2>
+          <img
+            src={
+              dataComics.thumbnail.path + "." + dataComics.thumbnail.extension
+            }
+            alt=""
+          />
         </div>
         <main>
-        <div className="container-cards">
-        {dataComics.comics.map((comic) => {
-          console.log(comic);
-          return (
-            <Link key={comic._id} to={`/comic/${comic._id}`}>
-            <div className="comic-selected">
-              {" "}
-              <article  className="comics-article">
-                <div  className={!comic.thumbnail.path.endsWith('image_not_available') ? "container-img not-available" : "container-img"} >
-                  <img
-                    src={comic.thumbnail.path + "." + comic.thumbnail.extension}
-                    alt=""
-                    />
-                </div> 
-                
-                {comic.title ? <div className="content-text">
-                <h2>{comic.title}</h2>
-                   <p>{comic.description}</p>
+          <div className="container-cards">
+            {dataComics.comics.map((comic) => {
+              //console.log(comic);
+              return (
+                <Link key={comic._id} to={`/comic/${comic._id}`}>
+                  <div className="comic-selected">
+                    {" "}
+                    <article className="comics-article">
+                      <div
+                        className={
+                          !comic.thumbnail.path.endsWith("image_not_available")
+                            ? "container-img not-available"
+                            : "container-img"
+                        }>
+                        <img
+                          src={
+                            comic.thumbnail.path +
+                            "." +
+                            comic.thumbnail.extension
+                          }
+                          alt=""
+                        />
+                      </div>
 
-                </div> : "" }
-                
-              </article>{" "}
-            </div>
-            </Link>
-          );
-        })}
-        </div>
+                      {comic.title ? (
+                        <div className="content-text">
+                          <h2>{comic.title}</h2>
+                          <p>{comic.description}</p>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </article>{" "}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
         </main>
       </div>
     </>
