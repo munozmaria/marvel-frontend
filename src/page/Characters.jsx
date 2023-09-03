@@ -98,22 +98,24 @@ const Characters = ({ search, setSkip, skip, token }) => {
               <Link to={`/character/${character._id}`}>
                 <article>
                   <div
+                  className="container-likes"
                     onClick={(event) => {
                       handleLike(event, character._id);
                     }}>
                     {/* [{id: 1, like: false}, {id: 2, like:true}] */}
                     {[...likesCharacters].includes(character._id) ? (
-                      <FontAwesomeIcon className="fa-beat" icon={faHeart} />
+                      <FontAwesomeIcon icon={faHeart} />
                     ) : (
-                      <FontAwesomeIcon icon={farfaHeart} />
+                      <FontAwesomeIcon  className="fa-beat"  icon={farfaHeart} />
                     )}
                   </div>
                   <div className="container-img">
                     <img className="characters-img" src={url} alt="" />
                   </div>
-
+                      <div className="content-text">
                   <h2>{character.name}</h2>
                   <p>{character.description}</p>
+                  </div>
                 </article>
               </Link>
             </div>

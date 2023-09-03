@@ -101,23 +101,26 @@ const Comics = ({ search, skip, setSkip, token }) => {
           return (
             <div key={comics._id}>
               <Link to={`/comic/${comics._id}`}>
-                <article>
+                <article className="comics-article">
                 <div
+                 className="container-likes"
                     onClick={(event) => {
                       handleLike(event, comics._id);
                     }}>
                     {/* [{id: 1, like: false}, {id: 2, like:true}] */}
                     {[...likeComics].includes(comics._id) ? (
-                      <FontAwesomeIcon className="fa-beat" icon={faHeart} />
+                      <FontAwesomeIcon  icon={faHeart} />
                     ) : (
-                      <FontAwesomeIcon icon={farfaHeart} />
+                      <FontAwesomeIcon className="fa-beat" icon={farfaHeart} />
                     )}
                   </div>
                   <div className="container-img">
                     <img src={url} alt="" />
                   </div>
+                  <div className="content-text">
                   <h2>{comics.title}</h2>
                   <p>{comics.description}</p>
+                  </div>
                 </article>
               </Link>
             </div>

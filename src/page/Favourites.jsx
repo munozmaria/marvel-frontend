@@ -13,7 +13,7 @@ const Favourite = () => {
   const fetchData = async () => {
     try {
       const allCharactersWithCookies = like.map((cookie) => {
-       // console.log(cookie)
+        // console.log(cookie)
         return axios.get(
           `https://site--marvel-backend--yxbrqvg2lzlq.code.run/character/${cookie}`
         );
@@ -30,7 +30,7 @@ const Favourite = () => {
   const fetchDataComics = async () => {
     try {
       const allComicsWithCookies = likeComic.map((cookie) => {
-       // console.log(cookie)
+        // console.log(cookie)
         return axios.get(
           `https://site--marvel-backend--yxbrqvg2lzlq.code.run/comic/${cookie}`
         );
@@ -44,31 +44,25 @@ const Favourite = () => {
     }
   };
 
-
-
-
   useEffect(() => {
     const fetchData = async (event) => {
       const response = await axios.get(
         `https://site--marvel-backend--yxbrqvg2lzlq.code.run/likesUsers/${token}`
       );
-      console.log(response)
+      console.log(response);
       setLike([...response.data.likesCharacters]);
       setLikeComic([...response.data.likesComics]);
-      
     };
     fetchData();
   }, [token]);
 
+  useEffect(() => {
+    fetchData();
+  }, [like]);
 
   useEffect(() => {
-    fetchData()
-  },[like])
-
-useEffect(() => {
-  fetchDataComics()
-},[likeComic])
-
+    fetchDataComics();
+  }, [likeComic]);
 
   return (
     <div>
@@ -90,20 +84,21 @@ useEffect(() => {
                       alt=""
                     />
                   </div>
-
-                  <h2>{character.data.name}</h2>
-                  <p>{character.data.description}</p>
+                  <div className="content-text">
+                    <h2>{character.data.name}</h2>
+                    <p>{character.data.description}</p>
+                  </div>
                 </article>
               </Link>
             </div>
           );
         })}
-            {dataComics.map((comic) => {
+        {dataComics.map((comic) => {
           //console.log(comic)
           return (
             <div key={comic.data._id}>
               <Link to={`/comic/${comic._id}`}>
-                <article>
+                <article className="comics-article">
                   <div className="container-img">
                     <img
                       className="comics-img"
@@ -115,9 +110,10 @@ useEffect(() => {
                       alt=""
                     />
                   </div>
-
+                  <div className="content-text">
                   <h2>{comic.data.name}</h2>
                   <p>{comic.data.description}</p>
+                  </div>
                 </article>
               </Link>
             </div>
