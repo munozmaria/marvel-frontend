@@ -66,7 +66,9 @@ const Comics = ({ search, skip, setSkip, token }) => {
 
 
   return isLoading ? (
-    <span>Loading... </span>
+    <div className="container-loading ">
+    <div className="loading"></div>
+  </div>
   ) : (
     <>
      <div className="container-buttons-pagination">

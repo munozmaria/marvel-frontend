@@ -62,6 +62,13 @@ const App = () => {
     }
   };
 
+  
+  const switchModals = () => {
+    setLoginModal(!loginModal);
+    setSignupModal(!signupModal);
+  };
+
+
 
 
   const notify = (message) => toast.error(message);
@@ -76,6 +83,7 @@ const App = () => {
           token={token}
           handleToken={handleToken}
           handleCloseModals={handleCloseModals}
+          switchModals={switchModals}
         />
       ) : (
         ""
@@ -88,6 +96,7 @@ const App = () => {
           ToastContainer={ToastContainer}
           handleToken={handleToken}
           handleCloseModals={handleCloseModals}
+          switchModals={switchModals}
         />
       ) : (
         ""

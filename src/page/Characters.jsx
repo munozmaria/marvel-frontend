@@ -65,7 +65,9 @@ const Characters = ({ search, setSkip, skip, token, setLoginModal }) => {
   };
 
   return isLoading ? (
-    <p>Loading....</p>
+    <div className="container-loading ">
+    <div className="loading"></div>
+  </div>
   ) : (
     <>
       <div className="container-buttons-pagination">
@@ -74,7 +76,7 @@ const Characters = ({ search, setSkip, skip, token, setLoginModal }) => {
             <button
               onClick={() => {
                 setSkip(skip - data.limit);
-                navigate("/");
+                navigate("/characters");
               }}>
               Previous Page
             </button>
@@ -85,7 +87,7 @@ const Characters = ({ search, setSkip, skip, token, setLoginModal }) => {
             <button
               onClick={() => {
                 setSkip(skip + data.limit);
-                navigate("/");
+                navigate("/characters");
               }}>
               Next Page
             </button>

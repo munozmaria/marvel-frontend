@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 const Comic = () => {
   const { comicId } = useParams();
-
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
   const [img, setImage] = useState("");
 
@@ -20,6 +20,7 @@ const Comic = () => {
           "." +
           response.data.thumbnail.extension;
         setImage(url);
+        setIsLoading(false);
         setData(response.data);
       } catch (error) {
         console.log(error.message);
@@ -28,7 +29,11 @@ const Comic = () => {
     fetchData();
   }, [comicId]);
 
-  return (
+  return isLoading ? (
+    <div className="container-loading ">
+    <div className="loading"></div>
+  </div>
+  ) : (
     <main>
        <div className="container-cards">
       <div className="id-comic">

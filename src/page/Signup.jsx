@@ -7,7 +7,7 @@ import { faEye, faEyeSlash, faX } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faEye, faEyeSlash, faX);
 
-const Signup = ({ handleCloseModals, handleToken, notify }) => {
+const Signup = ({ handleCloseModals, handleToken, notify, switchModals }) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +15,7 @@ const Signup = ({ handleCloseModals, handleToken, notify }) => {
   const [confirmHashPassword, setConfirmHashPassword] = useState(true);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [identiques, setIdentiques] = useState(true);
-   const [errorMessage, setErrorMessage] = useState("");
+   const [, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -142,7 +142,7 @@ const Signup = ({ handleCloseModals, handleToken, notify }) => {
 
             <button className="buttonFormulaire" type="submit">Sign up</button>
 
-            <p>Already have an account? Connect you !</p>
+            <p onClick={switchModals}>Already have an account? Connect you !</p>
           </form>
         </div>
       </div>

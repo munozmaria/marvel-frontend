@@ -9,7 +9,7 @@ import { faEye, faEyeSlash, faX } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faEye, faEyeSlash, faX);
 
-const Login = ({ handleCloseModals, handleToken }) => {
+const Login = ({ handleCloseModals, handleToken, switchModals }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hashPassword, setHashPassword] = useState(true);
@@ -87,7 +87,7 @@ const Login = ({ handleCloseModals, handleToken }) => {
               />
             </div>
             <button className="buttonFormulaire">Login</button>
-           
+            <p onClick={switchModals}>Pas encore de compte? Inscris-toi!</p>
           <span style={{color: "red"}}>{errorMessage}</span>
           </form>
         </div>

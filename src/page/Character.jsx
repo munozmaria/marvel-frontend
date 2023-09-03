@@ -27,7 +27,9 @@ const Character = () => {
   }, [characterId]);
 
   return isLoading ? (
-    <span>Loading...</span>
+    <div className="container-loading ">
+      <div className="loading"></div>
+    </div>
   ) : (
     <>
       <div className="selected-character">
