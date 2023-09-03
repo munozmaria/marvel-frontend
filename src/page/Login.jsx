@@ -89,7 +89,7 @@ const Login = ({ handleCloseModals, handleToken, switchModals, notify }) => {
               />
             </div>
             <button className="buttonFormulaire">Login</button>
-            <p onClick={switchModals}>Pas encore de compte? Inscris-toi!</p>
+            <p onClick={switchModals}>No account yet? Register yourself!</p>
           <span style={{color: "red"}}>{errorMessage}</span>
           </form>
         </div>
