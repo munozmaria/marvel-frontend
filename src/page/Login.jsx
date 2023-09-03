@@ -9,7 +9,7 @@ import { faEye, faEyeSlash, faX } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faEye, faEyeSlash, faX);
 
-const Login = ({ handleCloseModals, handleToken, switchModals }) => {
+const Login = ({ handleCloseModals, handleToken, switchModals, notify }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hashPassword, setHashPassword] = useState(true);
