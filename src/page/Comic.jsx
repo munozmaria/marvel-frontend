@@ -30,6 +30,7 @@ const Comic = () => {
 
   return (
     <main>
+       <div className="container-cards">
       <div className="id-comic">
         <div className="container-img">
           <img className="characters-img" src={img} alt="" />
@@ -37,6 +38,7 @@ const Comic = () => {
 
         <h2>{data.title}</h2>
         <p>{data.description}</p>
+      </div>
       </div>
     </main>
   );

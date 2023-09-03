@@ -32,8 +32,12 @@ const Character = () => {
     <>
       <div className="selected-character">
       
+      <div>
         <h2>{dataComics.name}</h2>
+        <img src={dataComics.thumbnail.path + "." + dataComics.thumbnail.extension} alt="" />
+        </div>
         <main>
+        <div className="container-cards">
         {dataComics.comics.map((comic) => {
           console.log(comic);
           return (
@@ -59,6 +63,7 @@ const Character = () => {
             </Link>
           );
         })}
+        </div>
         </main>
       </div>
     </>

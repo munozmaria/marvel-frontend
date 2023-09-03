@@ -65,10 +65,6 @@ const Comics = ({ search, skip, setSkip, token }) => {
 
 
 
-
-
-
-
   return isLoading ? (
     <span>Loading... </span>
   ) : (
@@ -100,6 +96,8 @@ const Comics = ({ search, skip, setSkip, token }) => {
               )}
               </div>
       <main >
+      <h2 className="title">COMICS</h2>
+        <div className="container-cards">
         {data.results.map((comics) => {
           const url = comics.thumbnail.path + "." + comics.thumbnail.extension;
           //console.log(comics._id);
@@ -131,6 +129,7 @@ const Comics = ({ search, skip, setSkip, token }) => {
             </div>
           );
         })}
+        </div>
       </main>
     </>
   );

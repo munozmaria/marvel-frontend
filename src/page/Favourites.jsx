@@ -69,7 +69,9 @@ const Favourite = () => {
 
   return (
     <div>
-      <main>
+      <main className="main ">
+      <h2 className="title favorites-class">FAVORITES</h2>
+      <div className="container-cards">
         {data.map((character) => {
           //console.log(character)
           return (
@@ -122,6 +124,7 @@ const Favourite = () => {
             </div>
           );
         })}
+        </div>
       </main>
     </div>
   );

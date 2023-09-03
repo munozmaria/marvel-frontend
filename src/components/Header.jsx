@@ -23,7 +23,7 @@ const Header = ({
   const [click, setClick] = useState(false);
   const handleClick = () => {
     setClick(!click);
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = click ? "auto" : "hidden";
   };
 
   const handleClickClosed = () => {
@@ -52,6 +52,7 @@ const Header = ({
       setLoginModal(true);
     } else{
       setClick(false);
+      document.body.style.overflow = "auto";
     }
   };
 

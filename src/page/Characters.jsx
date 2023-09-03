@@ -93,6 +93,8 @@ const Characters = ({ search, setSkip, skip, token, setLoginModal }) => {
         )}
       </div>
       <main>
+        <h2 className="title">CHARACTERS</h2>
+        <div className="container-cards">
         {data.results.map((character) => {
           //console.log(character);
           const url =
@@ -125,6 +127,7 @@ const Characters = ({ search, setSkip, skip, token, setLoginModal }) => {
             </div>
           );
         })}
+        </div>
       </main>
     </>
   );

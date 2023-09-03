@@ -167,6 +167,7 @@ header img {
 .searchInput {
   width: 0;
   transition: width 0.5s;
+  font-size: 20px;
 }
 
 .searchButton {
@@ -311,17 +312,38 @@ transform: 0.5s ease-in-out;
 /* =================================================================MAIN =================================================================  */
 
 
-main {
+.title{
+
+  font-size: 70px;
+  color: white;
+text-align: center;
+
+text-shadow: 0px 0px 0 rgb(250,2,27),
+                 1px 1px 0 rgb(245,-3,22),
+                 2px 2px 0 rgb(240,-8,17),
+                 3px 3px 0 rgb(235,-13,12),
+                 4px 4px 0 rgb(230,-18,7),
+                 5px 5px 0 rgb(225,-23,2),
+                 6px 6px 0 rgb(220,-28,0),
+                 7px 7px 0 rgb(215,-33,0),
+                 8px 8px 0 rgb(210,-38,0),
+                 9px 9px 0 rgb(205,-43,0),
+                 10px 10px  0 rgb(200,-48,0),
+                 11px 11px 10px rgba(0,0,0,0.6),
+                 11px 11px 1px rgba(0,0,0,0.5),
+                 0px 0px 10px rgba(0,0,0,.2);
+
+
+}
+
+main .container-cards{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin: 30px auto;
   gap: 23px;
   list-style: none;
-
-
 }
-
 
 
 
@@ -375,13 +397,13 @@ main article:hover {
 
 
 
-main article h2 {
+main .container-cards h2 {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 20px;
 }
 
-main article p {
+.container-cards p {
   font-size: 15px;
   overflow: hidden;
   margin-bottom: 10px;
@@ -451,6 +473,13 @@ main article:hover .content-text {
 
 
 /*========================================COMICS================================*/
+.selected-character{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 50px;
+}
 
 .selected-character h2 {
   text-align: center;
@@ -459,6 +488,41 @@ main article:hover .content-text {
 
 .selected-character article h2 {
   color: black;
+}
+.selected-character >div:first-child {
+  display: flex;
+  align-items: center;
+ gap:50px;
+}
+
+.selected-character >div:first-child h2{
+  font-size: 70px;
+  color: white;
+text-align: center;
+
+text-shadow: 0px 0px 0 rgb(250,2,27),
+                 1px 1px 0 rgb(245,-3,22),
+                 2px 2px 0 rgb(240,-8,17),
+                 3px 3px 0 rgb(235,-13,12),
+                 4px 4px 0 rgb(230,-18,7),
+                 5px 5px 0 rgb(225,-23,2),
+                 6px 6px 0 rgb(220,-28,0),
+                 7px 7px 0 rgb(215,-33,0),
+                 8px 8px 0 rgb(210,-38,0),
+                 9px 9px 0 rgb(205,-43,0),
+                 10px 10px  0 rgb(200,-48,0),
+                 11px 11px 10px rgba(0,0,0,0.6),
+                 11px 11px 1px rgba(0,0,0,0.5),
+                 0px 0px 10px rgba(0,0,0,.2);
+}
+
+.selected-character >div:first-child img{
+  height: 250px;
+  border-radius: 50%;
+}
+
+.favorites-class{
+  margin-top: 2em;
 }
 
 .id-comic {
@@ -621,8 +685,6 @@ main article:hover .content-text {
 
 
 .container-nav.active{
-  background-color: rgba(0, 0, 0, 0.85);
-
   left: 0px;
   opacity: 1;
   transition: all 0.5s ease;
@@ -631,29 +693,27 @@ main article:hover .content-text {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-
-  
-
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.85);
-  
+  background-color: rgba(0, 0, 0, 1);
   top: 0;
-  
-
 
 }
 
 
-
+.container-nav a:hover{
+  color: black;
+  background-color: white;
+}
+.search:hover{
+  transform: scale(1.1);
+}
 
 
 
 .nav-icon {
   display: block;
   position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate(-100%, 60%);
+  right: 23px;
   font-size: 1.8rem;
   cursor: pointer;
   color: rgb(237, 220, 228);
@@ -661,6 +721,19 @@ main article:hover .content-text {
   z-index: 2;
 }
 
+.nav-icon:hover{
+  transform: scale(1.1);
+}
 
+.title{
+  margin-top: 2em;
+  
+  }
+
+  .selected-character >div:first-child {
+    display: flex;
+ flex-direction: column;
+   gap:20px;
+  }
 
 }
