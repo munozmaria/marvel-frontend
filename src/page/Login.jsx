@@ -44,7 +44,9 @@ const Login = ({ handleCloseModals, handleToken, switchModals, notify }) => {
         notify(error.response.data.message)
       }
     } else {
-      setErrorMessage(error.response.data.message);
+
+      notify("Must specify your email and your password")
+      setErrorMessage("Must specify your email and your password");
      
     }
   };
