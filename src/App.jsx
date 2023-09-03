@@ -17,6 +17,7 @@ import Signup from "./page/Signup";
 import Login from "./page/Login";
 import Favourites from "./page/Favourites";
 
+
 const App = () => {
   const [token, setToken] = useState(Cookies.get("token") || null);
   const [search, setSearch] = useState("");
@@ -91,19 +92,18 @@ const App = () => {
       ) : (
         ""
       )}
-
-      <Header
-        setSearch={setSearch}
+      <Header  setSearch={setSearch}
         token={token}
         handleToken={handleToken}
         search={search}
         handleSingupButton={handleSingupButton}
         handleLoginButton={handleLoginButton}
-        setLoginModal={setLoginModal}
-      />
+        setLoginModal={setLoginModal}></Header>
+
+     
       <Routes>
         <Route
-          path="/"
+          path="/characters"
           element={
             <Characters
               search={search}
@@ -116,7 +116,7 @@ const App = () => {
             />
           }
         />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route
           path="/comics"
           element={<Comics search={search} skip={skip} setSkip={setSkip} token={token} />}

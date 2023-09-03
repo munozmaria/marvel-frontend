@@ -3,13 +3,25 @@
 
 
 const Home = () => {
-  return (<>
-  <div className="container-home">
- 
+  // const [isLoading, setIsLoading] = useState(false);
 
-   </div>
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   setTimeout(() => setIsLoading(false), 2000);
+  // }, []);
+
+  return  (
+   <>
+    <div className="container-loading hidden">
+    <div className="loading">
+  
+    </div>
+    </div>
+
+    <div className="container-home"></div>
    
-  </> )
+    </>
+  );
 };
 
 export default Home;

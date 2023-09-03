@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import logo from "../assets/img/marvel.png";
-import { Link} from "react-router-dom";
+import React, { useEffect, useState, useRef } from "react";
+import logo from "../assets/img/marvel1.png";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -19,16 +19,16 @@ const Header = ({
   handleLoginButton,
   setLoginModal,
 }) => {
+  const [menuOpen, setmenuOpen] = useState(false);
+  const [loginOpen, setloginOpen] = useState(false);
+
+  const [isVisible, setIsVisible] = useState(true);
 
   const [click, setClick] = useState(false);
   const handleClick = () => {
     setClick(!click);
+    setmenuOpen(false);
     document.body.style.overflow = click ? "auto" : "hidden";
-  };
-
-  const handleClickClosed = () => {
-    setClick(false);
-    document.body.style.overflow = "auto";
   };
 
   let menuRef = useRef();
@@ -50,75 +50,126 @@ const Header = ({
   const handleClickFavorites = () => {
     if (!token) {
       setLoginModal(true);
-    } else{
-      setClick(false);
+    } else {
+      setClick(false)
       document.body.style.overflow = "auto";
     }
+    setmenuOpen(false);
   };
 
   return (
-    <header ref={menuRef} className={click ? "main-container" : ""}>
-      <Link to="/home">
+    <header ref={menuRef}>
+      <Link className="logo" to="/">
         <img src={logo} alt="" />
       </Link>
-      <div className={click ? "container-nav active" : "container-nav"}>
-        <div className="navigation-links">
-          <Link to="/" onClick={click ? handleClick : false}>Characters</Link>
-          <Link to="/comics"  onClick={click ? handleClick : false}>Comics</Link>
-          <Link to={token ? "/favourites" : "/"} onClick={handleClickFavorites}>
-            Favourites
+      <div className="search">
+        <input
+          type="text"
+          placeholder="Recherche"
+          value={search}
+          className="searchInput"
+          onChange={(event) => {
+            //console.log(event.target.value)
+            setSearch(event.target.value);
+          }}
+        />
+        <button className="searchButton">
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </button>
+      </div>
+
+      {!token ? (
+        <div className="div-buttons-connection">
+          {" "}
+          <div
+            style={{ right: "18vw" }}
+            onClick={handleSingupButton}
+            className={isVisible ? "login signup" : "login hidden"}>
+            {" "}
+            Signup
+          </div>
+          <div
+            onClick={handleLoginButton}
+            className={isVisible ? "login" : "login hidden"}>
+            Login
+          </div>
+        </div>
+      ) : (
+        <div>
+          <Link to="/">
+            <div className="div-buttons-connection">
+              <div
+                 className={isVisible ? "login" : "login hidden"}
+                onClick={() => {
+                  handleToken(null);
+                }}>
+                Logout
+              </div>
+            </div>
           </Link>
         </div>
-
-        {!token ? (
-          <div className="div-buttons-connection">
-            {" "}
-            <button onClick={handleSingupButton} className="button-signup">
-              {" "}
-              S'inscrire
-            </button>
-            <button onClick={handleLoginButton} className="button-login">
-              Se connecter
-            </button>
-          </div>
-        ) : (
-          <div>
-            <Link to="/">
-              <div className="div-buttons-connection">
-                <button
-                  className="button-logout"
-                  onClick={() => {
-                    handleToken(null);
-                  }}>
-                  Se déconnecter
-                </button>
-              </div>
-            </Link>
-          </div>
-        )}
-
-        <div className="search">
-          <input
-            type="text"
-            placeholder="Recherche"
-            value={search}
-            className="searchInput"
-            onChange={(event) => {
-              //console.log(event.target.value)
-              setSearch(event.target.value);
-            }}
-          />
-          <button className="searchButton">
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </button>
+      )}
+      <div className={menuOpen ? "open" : "close"}>
+        <div
+          className={isVisible ? "burger" : "burger hidden"}
+          title="Open/Close menu"
+          onClick={() => {
+            setloginOpen(true);
+            setmenuOpen(!menuOpen);
+          }}>
+          <div className="line l1"></div>
+          <div className="line l2"></div>
+          <div className="line l3"></div>
         </div>
-      </div>
-      <div className="nav-icon">
-        {click === true ? (
-          <FontAwesomeIcon icon={faX} onClick={handleClickClosed} />
-        ) : (
-          <FontAwesomeIcon icon={faBars} onClick={handleClick} />
-        )}
+        <div id="menu">
+          {loginOpen && (
+            <>
+              <div>
+                <div className="wrapper">
+                  {" "}
+                  <span className="label-menu">MENU</span>
+                  <ul>
+                    <li>
+                      <div className="chakra-link active css-1udx80">
+                        <span>
+                          <Link
+                            to={"/characters"}
+                            className="text-link"
+                            onClick={handleClick}>
+                            Characters
+                          </Link>
+                        </span>
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        className="chakra-link css-1udx80"
+                        onClick={handleClick}>
+                        <span>
+                          <Link to={"/comics"} className="text-link">
+                            Comics
+                          </Link>
+                        </span>
+                      </div>
+                    </li>
+                    <li>
+                      <div className="chakra-link css-1udx80">
+                        <span>
+                          <Link
+                            to={token ? "/favourites" : "/"}
+                            className="text-link"
+                            onClick={handleClickFavorites}>
+                            Favorites
+                          </Link>
+                        </span>
+                      </div>
+                    </li>
+                  </ul>{" "}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </header>
   );

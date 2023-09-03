@@ -102,7 +102,7 @@ const Characters = ({ search, setSkip, skip, token, setLoginModal }) => {
           return (
             <div key={character._id}>
               <Link to={`/character/${character._id}`}>
-                <article>
+                <article >
                   <div
                     className="container-likes"
                     onClick={(event) => {
