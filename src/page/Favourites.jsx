@@ -13,23 +13,43 @@ const Favourite = () => {
 
   
 
-  const fetchData = async () => {
-    try {
-      const allCharactersWithCookies = like.map((cookie) => {
-        // console.log(cookie)
-        return axios.get(
-          `https://site--marvel-backend--yxbrqvg2lzlq.code.run/character/${cookie}`
-        );
-      });
-      axios.all(allCharactersWithCookies).then((favorites) => {
-        //console.log(favorites)
-        setData(favorites);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
+
+
+  useEffect(() => {
+    const fetchData = async (event) => {
+      const response = await axios.get(
+        `https://site--marvel-backend--yxbrqvg2lzlq.code.run/likesUsers/${token}`
+      );
+      console.log(response);
+      setLike([...response.data.likesCharacters]);
+      setLikeComic([...response.data.likesComics]);
+    };
+    fetchData();
+  }, [token]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const allCharactersWithCookies = like.map((cookie) => {
+          // console.log(cookie)
+          return axios.get(
+            `https://site--marvel-backend--yxbrqvg2lzlq.code.run/character/${cookie}`
+          );
+        });
+        axios.all(allCharactersWithCookies).then((favorites) => {
+          //console.log(favorites)
+          setData(favorites);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [like]);
+
+  useEffect(() => {
+    
   const fetchDataComics = async () => {
     try {
       const allComicsWithCookies = likeComic.map((cookie) => {
@@ -46,24 +66,6 @@ const Favourite = () => {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    const fetchData = async (event) => {
-      const response = await axios.get(
-        `https://site--marvel-backend--yxbrqvg2lzlq.code.run/likesUsers/${token}`
-      );
-      console.log(response);
-      setLike([...response.data.likesCharacters]);
-      setLikeComic([...response.data.likesComics]);
-    };
-    fetchData();
-  }, [token]);
-
-  useEffect(() => {
-    fetchData();
-  }, [like]);
-
-  useEffect(() => {
     fetchDataComics();
   }, [likeComic]);
 

@@ -22,7 +22,7 @@ const Header = ({
   const [menuOpen, setmenuOpen] = useState(false);
   const [loginOpen, setloginOpen] = useState(false);
 
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, ] = useState(true);
 
   const [click, setClick] = useState(false);
   const handleClick = () => {
