@@ -8,4 +8,4 @@ Backend Project
 
 ## Preview
 
-![](/img/marvel.png)
+![](src/assets/img/marvel.png)
