@@ -42,7 +42,10 @@ const Characters = ({ search, setSkip, skip, token, setLoginModal }) => {
       //console.log(response)
       setLikesCharacters(response.data.likesCharacters);
     };
-    fetchData();
+    if(token){
+      fetchData();
+
+    }
   }, [token]);
 
   const handleLike = async (event, characterId) => {

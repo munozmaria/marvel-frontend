@@ -41,7 +41,10 @@ const Comics = ({ search, skip, setSkip, token }) => {
       //console.log(response)
       setLikeComics(response.data.likesComics);
     };
-    fetchData();
+    if(token){
+      fetchData();
+
+    }
   }, [token]);
 
   const handleLike = async (event, comicId) => {
