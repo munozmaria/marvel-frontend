@@ -64,6 +64,7 @@ const Characters = ({ search, setSkip, skip, token }) => {
     <p>Loading....</p>
   ) : (
     <>
+    <div className="container-buttons-pagination">
       {skip > 0 && (
                 <div>
                   <button
@@ -88,6 +89,7 @@ const Characters = ({ search, setSkip, skip, token }) => {
                   </button>
                 </div>
               )}
+              </div>
       <main>
         {data.results.map((character) => {
           //console.log(character);

@@ -70,6 +70,7 @@ const Comics = ({ search, skip, setSkip, token }) => {
     <span>Loading... </span>
   ) : (
     <>
+     <div className="container-buttons-pagination">
    {skip > 0 && (
                 <div>
                   <button
@@ -94,6 +95,7 @@ const Comics = ({ search, skip, setSkip, token }) => {
                   </button>
                 </div>
               )}
+              </div>
       <main >
         {data.results.map((comics) => {
           const url = comics.thumbnail.path + "." + comics.thumbnail.extension;
