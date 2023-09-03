@@ -28,7 +28,7 @@ const Header = ({
   const handleClick = () => {
     setClick(!click);
     setmenuOpen(false);
-    document.body.style.overflow = click ? "auto" : "hidden";
+    
   };
 
   let menuRef = useRef();
@@ -51,8 +51,8 @@ const Header = ({
     if (!token) {
       setLoginModal(true);
     } else {
-      setClick(false)
       document.body.style.overflow = "auto";
+      setClick(false)
     }
     setmenuOpen(false);
   };

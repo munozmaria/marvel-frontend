@@ -1073,6 +1073,17 @@ main article:hover .content-text {
 
   }
 
+  .formulaire form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 220px;
+  
+  }
+
+  .formContainer{
+    padding: 10px 50px;
+  }
 
 
 }
