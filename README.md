@@ -1,10 +1,10 @@
 # Project Marvel
 
-Backend Project
+Frontend Project
 
 ## Tech Stack
 
-**Server:** Node, Express, MongoDB
+**Client:** React + Vite, HTML, CSS
 
 ## Preview
 
