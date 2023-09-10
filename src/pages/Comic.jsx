@@ -35,6 +35,7 @@ const Comic = () => {
     </div>
   ) : (
     <>
+      <div className="hero"></div>
       <main>
         <div className="container-cards">
           <div className="id-comic">

@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
-
 import axios from "axios";
-import ReactPaginate from "react-paginate";
-import { Link} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReactPaginate from "react-paginate";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as farfaHeart } from "@fortawesome/free-regular-svg-icons";
@@ -17,30 +16,38 @@ library.add(faMagnifyingGlass, faBars, faX);
 
 library.add(faHeart, farfaHeart);
 
-const Comics = ({ search, token, setSearch }) => {
-  const [data, setData] = useState({});
+const Characters = ({
+  search,
+  setSkip,
+  skip,
+  token,
+  setLoginModal,
+  setSearch,
+}) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState({});
+  const [likesCharacters, setLikesCharacters] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [likeComics, setLikeComics] = useState([]);
+
+  //console.log(likesCharacters)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://site--marvel-backend--yxbrqvg2lzlq.code.run/comics?title=${search}&limit=6&skip=${
+          `https://site--marvel-backend--yxbrqvg2lzlq.code.run/characters?name=${search}&limit=6&skip=${
             (currentPage - 1) * 12
           }`
         );
-        //console.log(response.data);
+
         setIsLoading(false);
         setData(response.data);
         setTotalPages(Math.ceil(response.data.count / 12));
       } catch (error) {
-        console.log(error);
+        console.error(error.message);
       }
     };
-
     fetchData();
   }, [search, currentPage]);
 
@@ -50,27 +57,27 @@ const Comics = ({ search, token, setSearch }) => {
         `https://site--marvel-backend--yxbrqvg2lzlq.code.run/likesUsers/${token}`
       );
       //console.log(response)
-      setLikeComics(response.data.likesComics);
+      setLikesCharacters(response.data.likesCharacters);
     };
     if (token) {
       fetchData();
     }
   }, [token]);
 
-  const handleLike = async (event, comicId) => {
+  const handleLike = async (event, characterId) => {
     event.preventDefault();
 
     const response = await axios.post(
       `https://site--marvel-backend--yxbrqvg2lzlq.code.run/favorites/${
-        likeComics.includes(comicId) ? "un" : ""
+        likesCharacters.includes(characterId) ? "un" : ""
       }like`,
       {
         token,
-        likesComics: comicId,
+        likesCharacters: characterId,
       }
     );
 
-    setLikeComics(response.data.user.likesComics);
+    setLikesCharacters(response.data.user.likesCharacters);
   };
 
   return isLoading ? (
@@ -79,41 +86,42 @@ const Comics = ({ search, token, setSearch }) => {
     </div>
   ) : (
     <>
+      <div className="hero"></div>
       <main>
-        <h2 className="title">COMICS</h2>
+        <h2 className="title">CHARACTERS</h2>
         <div className="searchContainer">
-        <div className="search">
-          <input
-            type="text"
-            placeholder="Recherche"
-            value={search}
-            className="searchInput"
-            onChange={(event) => {
-              //console.log(event.target.value)
-              setSearch(event.target.value);
-            }}
-          />
-          <button className="searchButton">
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </button>
-        </div>
+          <div className="search">
+            <input
+              type="text"
+              placeholder="Recherche"
+              value={search}
+              className="searchInput"
+              onChange={(event) => {
+                //console.log(event.target.value)
+                setSearch(event.target.value);
+              }}
+            />
+            <button className="searchButton">
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </button>
+          </div>
         </div>
         <div className="container-cards">
-          {data.results.map((comics) => {
+          {data.results.map((character) => {
+            //console.log(character);
             const url =
-              comics.thumbnail.path + "." + comics.thumbnail.extension;
-            //console.log(comics._id);
+              character.thumbnail.path + "." + character.thumbnail.extension;
             return (
-              <div key={comics._id}>
-                <Link to={`/comic/${comics._id}`}>
-                  <article className="comics-article">
+              <div key={character._id}>
+                <Link to={`/character/${character._id}`}>
+                  <article>
                     <div
                       className="container-likes"
                       onClick={(event) => {
-                        handleLike(event, comics._id);
+                        handleLike(event, character._id);
                       }}>
                       {/* [{id: 1, like: false}, {id: 2, like:true}] */}
-                      {[...likeComics].includes(comics._id) ? (
+                      {[...likesCharacters].includes(character._id) ? (
                         <FontAwesomeIcon icon={faHeart} />
                       ) : (
                         <FontAwesomeIcon
@@ -123,11 +131,11 @@ const Comics = ({ search, token, setSearch }) => {
                       )}
                     </div>
                     <div className="container-img">
-                      <img src={url} alt="" />
+                      <img className="characters-img" src={url} alt="" />
                     </div>
                     <div className="content-text">
-                      <h2>{comics.title}</h2>
-                      <p>{comics.description}</p>
+                      <h2>{character.name}</h2>
+                      <p>{character.description}</p>
                     </div>
                   </article>
                 </Link>
@@ -136,6 +144,7 @@ const Comics = ({ search, token, setSearch }) => {
           })}
         </div>
       </main>
+
       <ReactPaginate
         previousLabel="Previous"
         nextLabel="Next"
@@ -153,4 +162,4 @@ const Comics = ({ search, token, setSearch }) => {
   );
 };
 
-export default Comics;
+export default Characters;

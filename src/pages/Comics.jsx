@@ -1,8 +1,9 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import axios from "axios";
 import ReactPaginate from "react-paginate";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as farfaHeart } from "@fortawesome/free-regular-svg-icons";
@@ -16,39 +17,30 @@ library.add(faMagnifyingGlass, faBars, faX);
 
 library.add(faHeart, farfaHeart);
 
-const Characters = ({
-  search,
-  setSkip,
-  skip,
-  token,
-  setLoginModal,
-  setSearch,
-}) => {
-  const [isLoading, setIsLoading] = useState(true);
+const Comics = ({ search, token, setSearch }) => {
   const [data, setData] = useState({});
-  const [likesCharacters, setLikesCharacters] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const navigate = useNavigate();
-
-  //console.log(likesCharacters)
+  const [likeComics, setLikeComics] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://site--marvel-backend--yxbrqvg2lzlq.code.run/characters?name=${search}&limit=6&skip=${
+          `https://site--marvel-backend--yxbrqvg2lzlq.code.run/comics?title=${search}&limit=6&skip=${
             (currentPage - 1) * 12
           }`
         );
-
+        //console.log(response.data);
         setIsLoading(false);
         setData(response.data);
         setTotalPages(Math.ceil(response.data.count / 12));
       } catch (error) {
-        console.error(error.message);
+        console.log(error);
       }
     };
+
     fetchData();
   }, [search, currentPage]);
 
@@ -58,27 +50,27 @@ const Characters = ({
         `https://site--marvel-backend--yxbrqvg2lzlq.code.run/likesUsers/${token}`
       );
       //console.log(response)
-      setLikesCharacters(response.data.likesCharacters);
+      setLikeComics(response.data.likesComics);
     };
     if (token) {
       fetchData();
     }
   }, [token]);
 
-  const handleLike = async (event, characterId) => {
+  const handleLike = async (event, comicId) => {
     event.preventDefault();
 
     const response = await axios.post(
       `https://site--marvel-backend--yxbrqvg2lzlq.code.run/favorites/${
-        likesCharacters.includes(characterId) ? "un" : ""
+        likeComics.includes(comicId) ? "un" : ""
       }like`,
       {
         token,
-        likesCharacters: characterId,
+        likesComics: comicId,
       }
     );
 
-    setLikesCharacters(response.data.user.likesCharacters);
+    setLikeComics(response.data.user.likesComics);
   };
 
   return isLoading ? (
@@ -87,41 +79,42 @@ const Characters = ({
     </div>
   ) : (
     <>
+      <div className="hero"></div>
       <main>
-        <h2 className="title">CHARACTERS</h2>
+        <h2 className="title">COMICS</h2>
         <div className="searchContainer">
-        <div className="search">
-          <input
-            type="text"
-            placeholder="Recherche"
-            value={search}
-            className="searchInput"
-            onChange={(event) => {
-              //console.log(event.target.value)
-              setSearch(event.target.value);
-            }}
-          />
-          <button className="searchButton">
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </button>
-        </div>
+          <div className="search">
+            <input
+              type="text"
+              placeholder="Recherche"
+              value={search}
+              className="searchInput"
+              onChange={(event) => {
+                //console.log(event.target.value)
+                setSearch(event.target.value);
+              }}
+            />
+            <button className="searchButton">
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </button>
+          </div>
         </div>
         <div className="container-cards">
-          {data.results.map((character) => {
-            //console.log(character);
+          {data.results.map((comics) => {
             const url =
-              character.thumbnail.path + "." + character.thumbnail.extension;
+              comics.thumbnail.path + "." + comics.thumbnail.extension;
+            //console.log(comics._id);
             return (
-              <div key={character._id}>
-                <Link to={`/character/${character._id}`}>
-                  <article>
+              <div key={comics._id}>
+                <Link to={`/comic/${comics._id}`}>
+                  <article className="comics-article">
                     <div
                       className="container-likes"
                       onClick={(event) => {
-                        handleLike(event, character._id);
+                        handleLike(event, comics._id);
                       }}>
                       {/* [{id: 1, like: false}, {id: 2, like:true}] */}
-                      {[...likesCharacters].includes(character._id) ? (
+                      {[...likeComics].includes(comics._id) ? (
                         <FontAwesomeIcon icon={faHeart} />
                       ) : (
                         <FontAwesomeIcon
@@ -131,11 +124,11 @@ const Characters = ({
                       )}
                     </div>
                     <div className="container-img">
-                      <img className="characters-img" src={url} alt="" />
+                      <img src={url} alt="" />
                     </div>
                     <div className="content-text">
-                      <h2>{character.name}</h2>
-                      <p>{character.description}</p>
+                      <h2>{comics.title}</h2>
+                      <p>{comics.description}</p>
                     </div>
                   </article>
                 </Link>
@@ -144,7 +137,6 @@ const Characters = ({
           })}
         </div>
       </main>
-
       <ReactPaginate
         previousLabel="Previous"
         nextLabel="Next"
@@ -162,4 +154,4 @@ const Characters = ({
   );
 };
 
-export default Characters;
+export default Comics;

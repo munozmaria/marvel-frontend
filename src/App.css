@@ -57,7 +57,21 @@ header {
 
 }
 
+/*==============================================================HERO==============================================*/
 
+.hero{
+  width: 100%;
+  position: absolute;
+    top: 0;
+    height: 368px;
+ 
+ 
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+
+  background-image: url('./assets/img/spiderman.jpg');
+}
 .logo {
   z-index: 1400;
 }
@@ -79,6 +93,9 @@ header {
 .logo img:hover {
   background: black;
 }
+
+
+/* ================================================================= SEARCH =================================================================*/
 
 .searchContainer{
   margin: 0 auto;
@@ -317,6 +334,10 @@ header {
 
 /* =================================================================MAIN =================================================================  */
 
+
+main{
+  margin-top: 300px;
+}
 
 .title {
 
@@ -1008,7 +1029,7 @@ main article:hover .content-text {
   }
 
   .title {
-    margin-top: 1em;
+    margin-top: 5em;
   }
 
   .selected-character>div:first-child {

@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
 import Header from "./components/Header";
-import Home from "./page/Home";
+import Home from "./pages/Home";
 import "./App.css";
 import { useState } from "react";
 import Cookies from "js-cookie";
@@ -9,13 +9,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 //Pages
-import Comics from "./page/Comics";
-import Comic from "./page/Comic";
-import Characters from "./page/Characters";
-import Character from "./page/Character";
-import Signup from "./page/Signup";
-import Login from "./page/Login";
-import Favourites from "./page/Favourites";
+import Comics from "./pages/Comics";
+import Comic from "./pages/Comic";
+import Characters from "./pages/Characters";
+import Character from "./pages/Character";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import Favourites from "./pages/Favourites";
 
 
 const App = () => {

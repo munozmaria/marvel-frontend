@@ -10,8 +10,6 @@ const Favourite = () => {
   const [dataComics, setDataComics] = useState([]);
   const [likeComic, setLikeComic] = useState([]);
 
-
-
   useEffect(() => {
     const fetchData = async (event) => {
       const response = await axios.get(
@@ -66,7 +64,7 @@ const Favourite = () => {
 
   return (
     <div>
-    
+      <div className="hero"></div>
       <main className="main ">
         <h2 className="title favorites-class">FAVORITES</h2>
         <div className="container-cards">

@@ -2,14 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-
 const Character = () => {
   const { characterId } = useParams();
 
   const [isLoading, setIsLoading] = useState(true);
 
   const [dataComics, setDataComics] = useState({});
-
 
   useEffect(() => {
     const fetchDataComics = async () => {
@@ -34,7 +32,8 @@ const Character = () => {
     </div>
   ) : (
     <>
-      
+      <div className="hero"></div>
+        <main>
       <div className="selected-character">
         <div>
           <h2>{dataComics.name}</h2>
@@ -45,7 +44,6 @@ const Character = () => {
             alt=""
           />
         </div>
-        <main>
           <div className="container-cards">
             {dataComics.comics.map((comic) => {
               //console.log(comic);
@@ -84,8 +82,8 @@ const Character = () => {
               );
             })}
           </div>
-        </main>
       </div>
+        </main>
     </>
   );
 };
