@@ -559,9 +559,10 @@ main article:hover .content-text {
   display: flex;
   top: 0;
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
   align-items: center;
   z-index: 999;
+  color:white;
   justify-content: center;
 }
 
@@ -588,9 +589,9 @@ main article:hover .content-text {
   align-items: center;
   justify-content: center;
   margin: auto;
-  background-color: white;
+  background-color: rgb(11, 11, 11);
   padding: 48px 70px;
-  border-radius: 5px;
+  border-radius: 25px;
 
 
 }
@@ -606,12 +607,13 @@ main article:hover .content-text {
 }
 
 .formulaire form input {
-  padding: 20px;
+  padding: 14px;
   border-radius: 5px;
   width: 100%;
   outline: 0;
   font-size: 20px;
   border-width: 0 0 2px;
+  background-color: #2E2C30;
   border-color: rgb(164, 164, 181)
 }
 
@@ -624,7 +626,7 @@ main article:hover .content-text {
 
 .formulaire form .buttonFormulaire {
   margin-top: 25px;
-  background-color: rgb(235, 111, 111);
+  background-color: #ff2d55;
   padding: 10px 20px;
   border-radius: 5px;
   color: white;
@@ -639,7 +641,7 @@ main article:hover .content-text {
   text-align: center;
   font-size: 25px;
   letter-spacing: 2px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .formulaire form p{
@@ -807,7 +809,7 @@ main article:hover .content-text {
 
 #menu:after {
   width: 60%;
-  background-color: #12121c;
+  background-color: #E02F1F;
   padding-bottom: 60%;
   top: 50%;
 }
@@ -882,7 +884,7 @@ main article:hover .content-text {
 }
 
 #menu .wrapper ul>li>div>span:after {
-  background-color: #29293a;
+  background-color: #2C211F;
   transition-delay: 0.1s;
 }
 
@@ -1050,12 +1052,12 @@ main article:hover .content-text {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 220px;
+    width: 250px;
   
   }
 
   .formContainer{
-    padding: 10px 50px;
+    padding: 40px 50px;
   }
 
 
