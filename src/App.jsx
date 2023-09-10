@@ -116,6 +116,7 @@ const App = () => {
           element={
             <Characters
               search={search}
+              setSearch={setSearch}
               skip={skip}
               setSkip={setSkip}
               token={token}
@@ -128,7 +129,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route
           path="/comics"
-          element={<Comics search={search} skip={skip} setSkip={setSkip} token={token} />}
+          element={<Comics search={search}  setSearch={setSearch} skip={skip} setSkip={setSkip} token={token} />}
         />
         <Route path="/comic/:comicId" element={<Comic />} />
         <Route path="/character/:characterId" element={<Character />} />

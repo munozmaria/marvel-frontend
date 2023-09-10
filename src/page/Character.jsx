@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+
 
 const Character = () => {
   const { characterId } = useParams();
@@ -9,7 +9,7 @@ const Character = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [dataComics, setDataComics] = useState({});
-  let navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchDataComics = async () => {
@@ -34,11 +34,7 @@ const Character = () => {
     </div>
   ) : (
     <>
-      <div className="container-buttons-pagination">
-        <div>
-          <button onClick={() => navigate(-1)}> Previous Page</button>
-        </div>
-      </div>
+      
       <div className="selected-character">
         <div>
           <h2>{dataComics.name}</h2>

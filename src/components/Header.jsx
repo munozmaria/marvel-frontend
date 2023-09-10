@@ -1,14 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import logo from "../assets/img/marvel1.png";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faMagnifyingGlass,
-  faBars,
-  faX,
-} from "@fortawesome/free-solid-svg-icons";
-library.add(faMagnifyingGlass, faBars, faX);
+
 
 const Header = ({
   setSearch,
@@ -62,21 +55,7 @@ const Header = ({
       <Link className="logo" to="/">
         <img src={logo} alt="" />
       </Link>
-      <div className="search">
-        <input
-          type="text"
-          placeholder="Recherche"
-          value={search}
-          className="searchInput"
-          onChange={(event) => {
-            //console.log(event.target.value)
-            setSearch(event.target.value);
-          }}
-        />
-        <button className="searchButton">
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
-        </button>
-      </div>
+      
 
       {!token ? (
         <div className="div-buttons-connection">

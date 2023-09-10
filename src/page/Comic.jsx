@@ -1,13 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Comic = () => {
   const { comicId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
   const [img, setImage] = useState("");
-  let navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,11 +35,6 @@ const Comic = () => {
     </div>
   ) : (
     <>
-      <div className="container-buttons-pagination">
-        <div>
-          <button onClick={() => navigate(-1)}> Previous Page</button>
-        </div>
-      </div>
       <main>
         <div className="container-cards">
           <div className="id-comic">
