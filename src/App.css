@@ -80,7 +80,10 @@ header {
   background: black;
 }
 
-
+.searchContainer{
+  margin: 0 auto;
+  width: 337px;
+}
 
 .search {
   display: inline-flex;
@@ -90,6 +93,7 @@ header {
   border-radius: 5px;
   border: 1px solid white;
   margin: 20px;
+  width: 300px;
 }
 
 .search :is(input, button) {
@@ -122,7 +126,7 @@ header {
 }
 
 .search:focus-within input {
-  width: 200px;
+  width: 300px;
 
 }
 

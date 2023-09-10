@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import axios from "axios";
 import ReactPaginate from "react-paginate";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -20,7 +20,6 @@ library.add(faHeart, farfaHeart);
 const Comics = ({ search, token, setSearch }) => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [likeComics, setLikeComics] = useState([]);
@@ -82,6 +81,7 @@ const Comics = ({ search, token, setSearch }) => {
     <>
       <main>
         <h2 className="title">COMICS</h2>
+        <div className="searchContainer">
         <div className="search">
           <input
             type="text"
@@ -96,6 +96,7 @@ const Comics = ({ search, token, setSearch }) => {
           <button className="searchButton">
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </button>
+        </div>
         </div>
         <div className="container-cards">
           {data.results.map((comics) => {

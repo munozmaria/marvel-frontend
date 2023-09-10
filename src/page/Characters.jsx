@@ -89,6 +89,7 @@ const Characters = ({
     <>
       <main>
         <h2 className="title">CHARACTERS</h2>
+        <div className="searchContainer">
         <div className="search">
           <input
             type="text"
@@ -103,6 +104,7 @@ const Characters = ({
           <button className="searchButton">
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </button>
+        </div>
         </div>
         <div className="container-cards">
           {data.results.map((character) => {
