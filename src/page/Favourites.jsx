@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Favourite = () => {
   let token = Cookies.get("token", null);
@@ -10,7 +10,7 @@ const Favourite = () => {
   const [dataComics, setDataComics] = useState([]);
   const [likeComic, setLikeComic] = useState([]);
 
-  let navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchData = async (event) => {
@@ -66,16 +66,12 @@ const Favourite = () => {
 
   return (
     <div>
-      <div className="container-buttons-pagination">
-        <div>
-          <button onClick={() => navigate(-1)}> Previous Page</button>
-        </div>
-      </div>
+    
       <main className="main ">
         <h2 className="title favorites-class">FAVORITES</h2>
         <div className="container-cards">
           {data.map((character) => {
-            console.log(character)
+            //console.log(character)
             return (
               <div key={character.data._id}>
                 <Link to={`/character/${character.data._id}`}>

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReactPaginate from "react-paginate";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as farfaHeart } from "@fortawesome/free-regular-svg-icons";
@@ -12,7 +13,8 @@ const Characters = ({ search, setSkip, skip, token, setLoginModal }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
   const [likesCharacters, setLikesCharacters] = useState([]);
-
+  const [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
 
   //console.log(likesCharacters)
@@ -22,17 +24,20 @@ const Characters = ({ search, setSkip, skip, token, setLoginModal }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://site--marvel-backend--yxbrqvg2lzlq.code.run/characters?name=${search}&skip=${skip}`
+          `https://site--marvel-backend--yxbrqvg2lzlq.code.run/characters?name=${search}&limit=6&skip=${
+            (currentPage - 1) * 12
+          }`
         );
 
         setIsLoading(false);
         setData(response.data);
+        setTotalPages(Math.ceil(response.data.count / 12));
       } catch (error) {
         console.error(error.message);
       }
     };
     fetchData();
-  }, [search, skip]);
+  }, [search, currentPage]);
 
   useEffect(() => {
     const fetchData = async (event) => {
@@ -70,30 +75,7 @@ const Characters = ({ search, setSkip, skip, token, setLoginModal }) => {
   </div>
   ) : (
     <>
-      <div className="container-buttons-pagination">
-        {skip > 0 && (
-          <div>
-            <button
-              onClick={() => {
-                setSkip(skip - data.limit);
-                navigate("/characters");
-              }}>
-              Previous Page
-            </button>
-          </div>
-        )}
-        {skip < data.count - data.limit && (
-          <div>
-            <button
-              onClick={() => {
-                setSkip(skip + data.limit);
-                navigate("/characters");
-              }}>
-              Next Page
-            </button>
-          </div>
-        )}
-      </div>
+     
       <main>
         <h2 className="title">CHARACTERS</h2>
         <div className="container-cards">
@@ -131,6 +113,21 @@ const Characters = ({ search, setSkip, skip, token, setLoginModal }) => {
         })}
         </div>
       </main>
+     
+      <ReactPaginate
+          previousLabel="Previous"
+          nextLabel="Next"
+          breakLabel="..."
+          pageCount={totalPages}
+          marginPagesDisplayed={1}
+          pageRangeDisplayed={5}
+          onPageChange={(selectedPage) => {
+            setCurrentPage(selectedPage.selected + 1);
+          }}
+          containerClassName="pagination"
+          activeClassName="active"
+        />
+     
     </>
   );
 };

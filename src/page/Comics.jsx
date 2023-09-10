@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import axios from "axios";
+import ReactPaginate from "react-paginate";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -13,24 +14,29 @@ const Comics = ({ search, skip, setSkip, token }) => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate()
+  const [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const [likeComics, setLikeComics] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://site--marvel-backend--yxbrqvg2lzlq.code.run/comics?title=${search}&skip=${skip}`
+          `https://site--marvel-backend--yxbrqvg2lzlq.code.run/comics?title=${search}&limit=6&skip=${
+            (currentPage - 1) * 12
+          }`
         );
         //console.log(response.data);
         setIsLoading(false);
         setData(response.data);
+        setTotalPages(Math.ceil(response.data.count / 12));
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchData();
-  }, [search, skip]);
+  }, [search, currentPage]);
 
 
   useEffect(() => {
@@ -71,32 +77,6 @@ const Comics = ({ search, skip, setSkip, token }) => {
   </div>
   ) : (
     <>
-     <div className="container-buttons-pagination">
-   {skip > 0 && (
-                <div>
-                  <button
-                    onClick={() => {
-                      setSkip(skip - data.limit);
-                      navigate("/comics");
-                    }}
-                  >
-                    Previous Page
-                  </button>
-                </div>
-              )}
-      {skip < data.count - data.limit && (
-                <div>
-                  <button
-                    onClick={() => {
-                      setSkip(skip + data.limit);
-                      navigate("/comics");
-                    }}
-                  >
-                   Next Page
-                  </button>
-                </div>
-              )}
-              </div>
       <main >
       <h2 className="title">COMICS</h2>
         <div className="container-cards">
@@ -133,6 +113,19 @@ const Comics = ({ search, skip, setSkip, token }) => {
         })}
         </div>
       </main>
+      <ReactPaginate
+          previousLabel="Previous"
+          nextLabel="Next"
+          breakLabel="..."
+          pageCount={totalPages}
+          marginPagesDisplayed={1}
+          pageRangeDisplayed={5}
+          onPageChange={(selectedPage) => {
+            setCurrentPage(selectedPage.selected + 1);
+          }}
+          containerClassName="pagination"
+          activeClassName="active"
+        />
     </>
   );
 };
