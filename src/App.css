@@ -611,10 +611,11 @@ main article:hover .content-text {
   border-radius: 5px;
   width: 100%;
   outline: 0;
+  color:white;
   font-size: 20px;
   border-width: 0 0 2px;
   background-color: #2E2C30;
-  border-color: rgb(164, 164, 181)
+  border-color: #E02F1F;
 }
 
 
@@ -626,13 +627,13 @@ main article:hover .content-text {
 
 .formulaire form .buttonFormulaire {
   margin-top: 25px;
-  background-color: #ff2d55;
+  background-color: #E02F1F;
   padding: 10px 20px;
   border-radius: 5px;
   color: white;
   border: 1px solid black;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 21px;
   cursor: pointer;
 
 }
@@ -646,6 +647,7 @@ main article:hover .content-text {
 
 .formulaire form p{
   cursor: pointer;
+  font-size: 18px;
 }
 
 

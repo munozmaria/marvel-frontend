@@ -59,11 +59,11 @@ const Login = ({ handleCloseModals, handleToken, switchModals, notify }) => {
         </i>
         <div className="formContainer">
           <form action="" onSubmit={handleLogin}>
-            <h1>Login</h1>
+            <h1>LOGIN</h1>
 
             <input
               type="text"
-              placeholder="email"
+              placeholder="Email"
               autoCapitalize="none"
               value={email}
               onChange={(event) => {
@@ -72,7 +72,7 @@ const Login = ({ handleCloseModals, handleToken, switchModals, notify }) => {
             />
             <div className="passwordInput">
               <input
-                placeholder="password"
+                placeholder="Password"
                 autoCapitalize="none"
                 value={password}
                 type={hashPassword ? "password" : "text"}

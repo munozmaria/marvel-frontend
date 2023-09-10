@@ -69,7 +69,7 @@ const Signup = ({ handleCloseModals, handleToken, notify, switchModals }) => {
           <form
         onSubmit={handleSignup}
           >
-            <h1>Create an account</h1>
+            <h1>SIGNUP</h1>
 
             <input
               id="name"
