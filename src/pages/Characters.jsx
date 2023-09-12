@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { ReactSearchAutocomplete } from "react-search-autocomplete"; 
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactPaginate from "react-paginate";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -80,6 +82,25 @@ const Characters = ({
     setLikesCharacters(response.data.user.likesCharacters);
   };
 
+
+
+  const handleOnSearch = (string) => {
+    setSearch(string);
+  };
+
+  const handleOnSelect = (item) => {
+    console.log(item);
+    setSearch(item);
+  };
+
+  const formatResult = (item) => {
+    return (
+      <>
+        <span style={{ display: "block", textAlign: "left" }}>{item.name}</span>
+      </>
+    );
+  };
+
   return isLoading ? (
     <div className="container-loading ">
       <div className="loading"></div>
@@ -90,7 +111,21 @@ const Characters = ({
       <main>
         <h2 className="title">CHARACTERS</h2>
         <div className="searchContainer">
-          <div className="search">
+        <ReactSearchAutocomplete
+            items={data.results}
+            onSearch={handleOnSearch}
+            onSelect={handleOnSelect}
+            autoFocus
+            formatResult={formatResult}
+            styling={{
+              backgroundColor: "black",
+              color: "red",
+              border: "red",
+              margin: "20px auto",
+              zIndex: "8",
+            }}
+          />
+          {/* <div className="search">
             <input
               type="text"
               placeholder="Recherche"
@@ -104,7 +139,7 @@ const Characters = ({
             <button className="searchButton">
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
-          </div>
+          </div> */}
         </div>
         <div className="container-cards">
           {data.results.map((character) => {
