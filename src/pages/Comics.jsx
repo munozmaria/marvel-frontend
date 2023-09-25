@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as farfaHeart } from "@fortawesome/free-regular-svg-icons";
+import { ReactSearchAutocomplete } from "react-search-autocomplete";
 
 import {
   faMagnifyingGlass,
@@ -18,7 +19,7 @@ library.add(faMagnifyingGlass, faBars, faX);
 library.add(faHeart, farfaHeart);
 
 const Comics = ({ search, token, setSearch }) => {
-  const [data, setData] = useState({});
+  const [dataResponse, setDataResponse] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,14 +28,15 @@ const Comics = ({ search, token, setSearch }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const titleToSearch = search.replaceAll(" ", "+");
         const response = await axios.get(
-          `https://site--marvel-backend--yxbrqvg2lzlq.code.run/comics?title=${search}&limit=6&skip=${
+          `https://site--marvel-backend--yxbrqvg2lzlq.code.run/comics?title=${titleToSearch}&limit=30&skip=${
             (currentPage - 1) * 12
           }`
         );
         //console.log(response.data);
+        setDataResponse(response.data);
         setIsLoading(false);
-        setData(response.data);
         setTotalPages(Math.ceil(response.data.count / 12));
       } catch (error) {
         console.log(error);
@@ -73,6 +75,26 @@ const Comics = ({ search, token, setSearch }) => {
     setLikeComics(response.data.user.likesComics);
   };
 
+  const handleOnSearch = (string) => {
+    //console.log(string)
+    setSearch(string);
+  };
+
+  const handleOnSelect = (item) => {
+    console.log(item);
+    setSearch(item);
+  };
+
+  const formatResult = (item) => {
+    return (
+      <>
+        <span style={{ display: "block", textAlign: "left" }}>
+          {item.title}
+        </span>
+      </>
+    );
+  };
+
   return isLoading ? (
     <div className="container-loading ">
       <div className="loading"></div>
@@ -80,27 +102,27 @@ const Comics = ({ search, token, setSearch }) => {
   ) : (
     <>
       <div className="hero"></div>
+        <div className="searchContainer">
+          <ReactSearchAutocomplete
+            items={dataResponse.results}
+            onSearch={handleOnSearch}
+            onSelect={handleOnSelect}
+            autoFocus
+            formatResult={formatResult}
+            styling={{
+              backgroundColor: "black",
+              color: "red",
+              border: "1px solid white",
+              margin: "20px auto",
+             
+              
+            }}
+          />
+        </div>
       <main>
         <h2 className="title">COMICS</h2>
-        <div className="searchContainer">
-          <div className="search">
-            <input
-              type="text"
-              placeholder="Recherche"
-              value={search}
-              className="searchInput"
-              onChange={(event) => {
-                //console.log(event.target.value)
-                setSearch(event.target.value);
-              }}
-            />
-            <button className="searchButton">
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
-            </button>
-          </div>
-        </div>
         <div className="container-cards">
-          {data.results.map((comics) => {
+          {dataResponse.results.map((comics) => {
             const url =
               comics.thumbnail.path + "." + comics.thumbnail.extension;
             //console.log(comics._id);

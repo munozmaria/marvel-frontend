@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ReactSearchAutocomplete } from "react-search-autocomplete"; 
+import { ReactSearchAutocomplete } from "react-search-autocomplete";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactPaginate from "react-paginate";
@@ -38,13 +38,12 @@ const Characters = ({
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://site--marvel-backend--yxbrqvg2lzlq.code.run/characters?name=${search}&limit=6&skip=${
+          `https://site--marvel-backend--yxbrqvg2lzlq.code.run/characters?name=${search}&limit=30&skip=${
             (currentPage - 1) * 12
           }`
         );
-
-        setIsLoading(false);
         setData(response.data);
+        setIsLoading(false);
         setTotalPages(Math.ceil(response.data.count / 12));
       } catch (error) {
         console.error(error.message);
@@ -82,18 +81,17 @@ const Characters = ({
     setLikesCharacters(response.data.user.likesCharacters);
   };
 
-
-
   const handleOnSearch = (string) => {
     setSearch(string);
   };
 
   const handleOnSelect = (item) => {
     console.log(item);
-    setSearch(item);
+    setSearch(item.name);
   };
 
   const formatResult = (item) => {
+    console.log('MMMMM')
     return (
       <>
         <span style={{ display: "block", textAlign: "left" }}>{item.name}</span>
@@ -108,10 +106,8 @@ const Characters = ({
   ) : (
     <>
       <div className="hero"></div>
-      <main>
-        <h2 className="title">CHARACTERS</h2>
         <div className="searchContainer">
-        <ReactSearchAutocomplete
+          <ReactSearchAutocomplete
             items={data.results}
             onSearch={handleOnSearch}
             onSelect={handleOnSelect}
@@ -120,27 +116,15 @@ const Characters = ({
             styling={{
               backgroundColor: "black",
               color: "red",
-              border: "red",
+              border: "1px solid white",
               margin: "20px auto",
-              zIndex: "8",
+             
             }}
           />
-          {/* <div className="search">
-            <input
-              type="text"
-              placeholder="Recherche"
-              value={search}
-              className="searchInput"
-              onChange={(event) => {
-                //console.log(event.target.value)
-                setSearch(event.target.value);
-              }}
-            />
-            <button className="searchButton">
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
-            </button>
-          </div> */}
+         
         </div>
+      <main>
+        <h2 className="title">CHARACTERS</h2>
         <div className="container-cards">
           {data.results.map((character) => {
             //console.log(character);

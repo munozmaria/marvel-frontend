@@ -65,7 +65,7 @@ header {
     top: 0;
     height: 368px;
  
- 
+ opacity: 0.5;
   background-repeat: no-repeat;
   background-position: top;
   background-size: cover;
