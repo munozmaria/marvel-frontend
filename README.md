@@ -15,6 +15,7 @@ The backend API for the app can be accessed at [Marvel Backend](https://github.c
 **Server:** Node, Express
 
 ## Preview
+https://marvel50.netlify.app
 
 ![](src/assets/gif/marvel.gif)
 
