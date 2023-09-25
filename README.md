@@ -44,7 +44,7 @@ Feel free to create an account to unlock the full potential of the Marvel App an
 
 ## Installation
 
-To run the Vinted App on your local machine, follow these steps:
+To run the Marvel App on your local machine, follow these steps:
 
 1. Clone this repository to your computer:
 
